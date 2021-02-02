@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+	.card{
+		max-width: 700px;
+	}
+	.card-body{
+		padding: 20px;
+	}
+	.delete
+	{
+	  background-color: #f44336;
+	  width: 200px;
+	  height: 500px;
+	  color: rgb(12, 1, 1);
+
+	}
+</style>
+
+<div class="container">
+	<div class="row">
+
+	 
+		<div class="card m-auto">
+			<img class="card-img-top" src="{{blog_post.image.url}}">
+			<br>
+			<font style="color: rgb(22, 21, 21);font-size: x-large;">
+			<div class="card-body mt-2 mb-2">
+			  <h2 class="card-title" style="color: royalblue;">{{blog_post.Equipment_name}}</h2>
+			  <br>
+			  <p class="card-text"> <font style="color: rgb(207, 107, 107);">Details:-</font> {{blog_post.detail|safe}}</p>
+
+			  <p class="card-text"><font style="color: rgb(207, 107, 107);">Price:-</font> {{blog_post.price}}</p>
+
+			  {% if blog_post.availablity == True %}
+				 <p class="card-text"><font style="color:rgb(207, 107, 107);">Avaliblity Of Equipment:-</font> <font style="color: rgb(0, 0, 0);">  Available </font>
+				 {%else%}
+				<p class="card-text"> <font style="color: rgb(207, 107, 107);">Avaliblity Of Equipment:-</font>  <font style="color: rgb(0, 0, 0);"> Outofstoke </p></font>
+				 {% endif %}
+			 <br>
+			 <br>
+			  {% if blog_post.author == request.user %}
+			 <a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
+				{% comment %} <a href="{}" class="btn btn-primary">Update</a> {% endcomment %}
+			  {% endif %}  {% if blog_post.author == request.user %}
+			 <a href="{% url 'blog:delete' blog_post.slug %}" class="btn btn-danger">Delete</a> 
+				 
+			  {% endif %}
+			</div>
+			 
+			</font>
+		</div>
+	</div>
+</div>
+
+	
+
+{% endblock content %}
+
+
+

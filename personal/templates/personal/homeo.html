@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+
+<!-- main content -->
+<div class="container">
+	<div class="row ">
+	<div class=" col-md-12 "  >
+		
+		<form method="GET" id="search"  data-cities-url="{% url 'ajax_load_cities' %}" class="form" >
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xs-4">
+						<select  class="form-control"   name="state" id="id_qp"   ">
+							<option value="" selected>select state</option>
+							{% for i in state %}
+							<option value="{{i.id}}">{{i.name}}</option>  
+							{% endfor %}
+						   </select>
+					</div>
+					<div class="col-xs-4">
+						<select name="q" id="id_q" class="form-control">
+							<option value="" selected>select city</option>
+						</select>
+					</div>
+					<div class="col-xs-4">
+						<input type="submit" name="sub1" value="Search" class="form-control btn-info" >
+					</div>
+				</div>
+			</div>
+			
+	    
+	   </form>
+	   
+	   <script> 
+		$("#id_qp").change(function () {
+		  const url = $("#search").attr("data-cities-url");  // get the url of the `load_cities` view
+		  const countryId = $(this).val();  // get the selected country ID from the HTML input
+  
+		  $.ajax({                       // initialize an AJAX request
+			  url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+			  data: {
+				  'country_id': countryId       // add the country id to the GET parameters
+			  },
+			  success: function (data) {   // `data` is the return of the `load_cities` view function
+				//  $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+				 
+  
+				  let html_data = '<option value="">---------</option>';
+				  data.forEach(function (city) {
+					  html_data += `<option value="${city.name}">${city.name}</option>`
+				  });
+				  console.log(html_data);
+				  $("#id_q").html(html_data);
+  
+				   
+			  }
+		  });
+  
+	  });
+	
+  </script></div></div>
+	<div class="row" >
+
+		<!-- blog feed -->
+	
+
+			<!-- Top 'create post' bar -->
+			 
+			<!-- end Top 'create post' bar -->
+
+			<!-- Blog posts-->
+			{% if users %}
+				{% for user in users %}
+				  {% if user.is_admin == False %}
+				  <div class=" col-md-6  my-2 ">
+							{% include 'blog/snippets/blog_post_snippet.html' with users=users %}  
+				  </div>
+				 {% endif %}
+				{% endfor %}
+			
+			{% else %}
+				 
+					{% include 'blog/snippets/blog_post_snippet.html' with query=query %}
+			 
+			 {% endif %}  
+			<!-- End Blog posts-->
+
+		<!-- Pagination -->
+	
+
+		</div>
+		<!-- end blog feed -->
+
+
+		<!-- Right 'create post' column  -->
+		  		 {% include 'blog/snippets/blog_post_pagination.html' with usres=users %}  	
+		
+		</div>
+		<!-- end Right 'create post' column  -->
+
+
+
+	</div>
+</div>
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+
+ 
+<div class="container">
+	<div class="row">
+
+		<!-- blog feed -->
+		<div class=" col-lg-9  ">
+
+	 
+			<div class="d-lg-none mb-3">
+				<div class="card m-auto d-flex flex-column p-1">
+					<img class="img-fluid d-block m-auto pb-2" src="{% static 'codingwithmitch_logo.png' %}" width="72" height="72">
+					<p class="lead"> Here You can Add your  showroom's equipment Details on this site.</p>
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Add Equipment</a></p>
+				</div>
+			</div>
+		 
+	
+			{% if blog_posts %}
+         <div class="row">
+          {% for post in blog_posts %}
+	 
+			<div class=" card col-md-3 col-sm-6 col-12    my-1" > 
+				<a href="{% url 'blog:detail' post.slug %}"> <img src={{post.image.url}}   class="img-fluid"      >
+				<font style="color: black; text-align:  start;"><p class="card-title"> {{post.Equipment_name}} </p></font>
+				<!-- <a href="{% url 'blog:edit' post.slug %}" class="btn btn-primary card-text">Update</a> --></a>
+			</div>
+	 
+           {% endfor %}
+		</div>
+          {% else %}
+           <p>You have no add any equipments. add an equipment of your showroom <a href="{% url 'blog:create' %}">here</a>.</p>
+          {% endif %} 
+ 
+		{% include 'blog/snippets/blog_post_pagination.html' with blog_posts=blog_posts %}
+
+		</div>
+	 
+	
+ 
+		<div  class="right-column col-lg-3 d-lg-flex d-none flex-column">
+		</a>
+			<div class="card create-post-bar d-flex flex-column p-3">
+				<img class="img-fluid d-block m-auto pb-2" src="{% static 'codingwithmitch_logo.png' %}" width="72" height="72">
+				<p class="lead">Here You can Add your  showroom's equipment Details on this site.</p>
+				<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Add Equipments</a></p>
+			</div>
+		
+		</div>
+	</div>
+	</div>
+	</div></div>
+
+
+	</div>
+</div>
+
+ 
+
+
+
+
+ {% endblock  %}

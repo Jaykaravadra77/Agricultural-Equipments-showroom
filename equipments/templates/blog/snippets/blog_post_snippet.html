@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ 
+ 
+ 
+</style>
+</head>
+
+<body>
+      
+  {%if users %}
+   <!-- <a href="{% url 'details' user.id %}"></a> -->
+    <div class="row">
+      <div class="card mx-2" >
+         
+        <div class="card m-auto ">
+          
+            <img  class="img-fluid  img-thumbnail responsive"  src="{{user.image.url}}" width="100%"  style="max-height: 250px;"  >
+          
+          <div class="card-body my-2 com-md-3 " style="background-color: rgb(255, 255, 255);">
+           <font style="font-size: larger;">
+            <h2 class="card-title" style="color: royalblue;">{{user.showroom_name}}</h2> 
+           <font style="color: rgb(8, 0, 0);">
+         <p class="card-text">Email:-{{user.email|safe|truncatechars:180}}</p>
+         <p class="card-text">State:-{{user.State|safe|truncatechars:180}}</p>
+            <p class="card-text">City:-{{user.city|safe|truncatechars:180}}</p>
+            <p class="card-text">Address:-{{user.address|safe|truncatechars:180}}</p>
+            <p class="card-text">contact no:-{{user.contact_no|safe|truncatechars:180}}</p>
+            <p class="card-text">which kind  of equipment selling  by showroom:-{{user.showroom_type|safe|truncatechars:180}}</p>
+            <a href=" {% url 'details' user.id %}" class="btn btn-success">Enter In Showroom</a> 
+          </font>
+           </font>
+          </div>
+          
+        </div>
+ 
+      </div>
+  
+ {% else %}
+ 
+	<div class="row col-md-12 mt-4">
+		<div class="col-md-12 card m-auto ">
+			<div class="card-body mt-2 mb-4">
+				<h2 class="card-title">No results</h2>
+				<p class="card-text">There were no results matching the search: "{{query}}"</p>
+			</div>
+		</div>
+	</div>
+  
+
+{% endif %}
+
+
+</body>
+
+</div>
+</html>

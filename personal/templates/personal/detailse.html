@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+<div class="container">
+	{% for post in users|slice:":1" %}
+<div class="col-12 " style="height: 80px;   " > <marquee behavior="scroll" scrollamount="15"  direction="left"  style="padding-top: 0px; margin-left:0%;font-family: 'Times New Roman', Times, serif; margin-right:0%;background-color:rgba(240, 202, 202, 0.075) ;height:70px;font-size: xx-large;color: rgba(7, 62, 134, 0.726) ; border-radius:  2%;  "  ><font style="font-family: 'Times New Roman', Times, serif;font-size: 50px;"><b> Welcom to {{post.author}}.&nbsp;see here  our equipments!!</b></font></marquee></div>
+  
+ 
+ 
+{% endfor %}
+	<div class="row  ">
+		 
+	  {% for post in users%}
+	     
+       <div class="col-md-4 my-2 col-sm-6  "  >
+		<div class=" card m-auto px-0  bg-light cards borders " >
+			<img class="card-img-top img-fluid  img-thumbnail  "  src="{{post.image.url}}"  style="max-height: 150px;">	
+		   <font style="color: black;">
+			<div class="card-block  " style="background-color: rgba(255, 255, 255, );"
+				 
+	 		  <h4 class="card-title"> <h5>{{post.Equipment_name}}</h5>  
+	  			<p class="card-text">Prcie:- {{post.price}}</p>
+	  			
+				  {% if post.availablity == True %}
+				 <p class="card-text">Avaliblity Of Equipment:-<font style="color: rgb(0, 0, 0);">  Available </p></font>
+				 {%else%}
+				<p class="card-text">Avaliblity Of Equipment:-<font style="color: rgb(10, 10, 10);"> Outofstoke </p></font>
+				 {% endif %}
+				  <p><a href="{% url 'personal:detaile' post.slug %} " class="">Click here for Details</p></a>
+				</font>
+			</font>	
+		</div>
+	</div>		 
+			
+		    </div>
+		{% endfor %}  
+ 
+
+
+
+
+
+
+
+
+
+		
+	</div>
+
+
+ 
+ </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+

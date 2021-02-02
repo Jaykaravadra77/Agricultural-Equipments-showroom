@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static%}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style type="text/css">
+  .create-form {
+	    width: 100%;
+	    max-width: 100%;
+	     
+		 
+  	}
+
+  	.submit-button{
+  		max-width: 150px;
+  	}
+</style>
+
+<div class="container">
+	<div class="row justify-content-center "   >
+		<div class="col-md-4    ">
+			
+			<form class="create-form" method="post" enctype="multipart/form-data" >{% csrf_token %}
+
+				<div class="d-flex flex-column pb-3 ">
+					<img class="img-thumbnail rounded-circle mx-auto d-block " src="{% static 'aeq.jpg' %}"  width="350" height="150">
+				  </div>
+				{{ form|crispy }}
+                {% for field in registration_form %}
+    			  <p>
+      		    {% for error in field.errors %}
+          		<p style="color: red">{{ error }}</p>
+       			 {% endfor %}
+     		 </p>
+  			{% endfor %}
+  			{% if registration_form.non_field_errors %}
+    			<div style="color: red">
+    			  <p>{{registration_form.non_field_errors}}</p>
+    				</div>
+      
+  {% endif %}
+				<!-- Submit btn -->
+				<button class="submit-button btn btn-lg btn-primary btn-block" type="submit">Add</button>
+			</form>	
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock content %}
